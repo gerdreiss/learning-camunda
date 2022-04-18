@@ -1,0 +1,47 @@
+{
+	"info": {
+		"_postman_id": "7cc86af6-344c-4e59-9fb6-1f1f4430969c",
+		"name": "Camunda",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Start Payment Retrieval Process",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"variables\": {\n\t\t\"amount\": {\n\t\t\t\"value\":555,\n\t\t\t\"type\":\"integer\"\n\t\t},\n\t\t\"item\": {\n\t\t\t\"value\": \"item-xyz\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/process-definition/key/payment-retrieval/start",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engine-rest",
+						"process-definition",
+						"key",
+						"payment-retrieval",
+						"start"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
