@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  camunda:
+    container_name: camunda
+    image: camunda/camunda-bpm-platform:run-latest
+    restart: always
+    ports:
+      - "8080:8080"
+
