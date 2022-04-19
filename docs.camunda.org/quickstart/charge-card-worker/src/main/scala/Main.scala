@@ -20,8 +20,8 @@ import java.net.URI
       logger.info(s"Received external task ${externalTask.getId}")
 
       // get the process variables
-      val item   = externalTask.getVariable("item")
-      val amount = externalTask.getVariable("amount")
+      val item: String    = externalTask.getVariable("item")
+      val amount: Integer = externalTask.getVariable("amount")
 
       logger.info("Charging credit card with an amount of '" + amount + "'€ for the item '" + item + "'...")
 
