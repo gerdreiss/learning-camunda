@@ -1,0 +1,40 @@
+{
+  "components": [
+    {
+      "label": "Amount",
+      "type": "number",
+      "id": "Field_1fqb6d8",
+      "key": "amount",
+      "description": "Amount to charge ",
+      "validate": {
+        "required": true,
+        "min": 1
+      }
+    },
+    {
+      "label": "Item",
+      "type": "textfield",
+      "id": "Field_02mukab",
+      "key": "item",
+      "validate": {
+        "required": true,
+        "minLength": 1
+      }
+    },
+    {
+      "label": "Approved?",
+      "type": "checkbox",
+      "id": "Field_15dnrlv",
+      "key": "approved"
+    }
+  ],
+  "type": "default",
+  "id": "payment-form",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.0.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.17.0",
+  "schemaVersion": 4
+}
