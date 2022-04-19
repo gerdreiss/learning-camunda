@@ -9,16 +9,10 @@
 			"name": "Start Payment Retrieval Process",
 			"request": {
 				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "default"
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"variables\": {\n\t\t\"amount\": {\n\t\t\t\"value\":555,\n\t\t\t\"type\":\"integer\"\n\t\t},\n\t\t\"item\": {\n\t\t\t\"value\": \"item-xyz\"\n\t\t}\n\t}\n}",
+					"raw": "{\n\t\"variables\": {\n\t\t\"amount\": {\n\t\t\t\"value\":555,\n\t\t\t\"type\":\"integer\"\n\t\t},\n\t\t\"item\": {\n\t\t\t\"value\": \"item-xyz\",\n            \"type\": \"string\"\n\t\t}\n\t}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
