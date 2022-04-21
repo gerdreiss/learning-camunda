@@ -2,5 +2,5 @@
 
 ...with an external Task in Scala
 
-![![Payment Retrieval Process](doc/payment-retrieval-process.png "Payment Retrieval Process")
+![Payment Retrieval Process](doc/payment-retrieval-process.png "Payment Retrieval Process")
 
