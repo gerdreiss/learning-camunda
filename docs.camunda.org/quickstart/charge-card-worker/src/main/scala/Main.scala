@@ -23,7 +23,7 @@ import java.net.URI
       val item: String    = externalTask.getVariable("item")
       val amount: Integer = externalTask.getVariable("amount")
 
-      logger.info("Charging credit card with an amount of '" + amount + "'€ for the item '" + item + "'...")
+      logger.info("Charging credit card with an amount of " + amount + "€ for the item '" + item + "'...")
 
       Desktop
         .getDesktop()
