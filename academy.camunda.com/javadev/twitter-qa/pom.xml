@@ -86,6 +86,7 @@
       <groupId>javax.xml.bind</groupId>
       <artifactId>jaxb-api</artifactId>
     </dependency>
+
     <!-- Use GraalVM JavaScript for JDK > 14 -->
     <dependency>
       <groupId>org.graalvm.js</groupId>
@@ -98,6 +99,7 @@
       <version>21.1.0</version>
     </dependency>
 
+    <!-- Kotlin -->
     <dependency>
       <groupId>org.jetbrains.kotlin</groupId>
       <artifactId>kotlin-reflect</artifactId>
@@ -107,9 +109,22 @@
       <artifactId>kotlin-stdlib-jdk8</artifactId>
     </dependency>
 
+    <!-- Test dependencies -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.camunda.bpm.extension</groupId>
+      <artifactId>camunda-bpm-junit5</artifactId>
+      <version>1.0.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.camunda.bpm.assert</groupId>
+      <artifactId>camunda-bpm-assert</artifactId>
+      <version>15.0.0</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
