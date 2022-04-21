@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1qnhx18" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.17.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1qnhx18" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.17.0">
   <bpmn:process id="TwitterQAProcess" name="Twitter QA" isExecutable="true">
     <bpmn:startEvent id="TweetWrittenStartEvent" name="Tweet written">
       <bpmn:outgoing>Flow_1uuhc2l</bpmn:outgoing>
@@ -23,11 +23,6 @@
       <bpmn:incoming>Flow_1b6phy1</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_1b6phy1" sourceRef="PublishTweetTask" targetRef="TweetPublishedEndEvent" />
-    <bpmn:scriptTask id="PublishTweetTask" name="Publish tweet" scriptFormat="javascript">
-      <bpmn:incoming>YesSequenceFlow</bpmn:incoming>
-      <bpmn:outgoing>Flow_1b6phy1</bpmn:outgoing>
-      <bpmn:script>print("publishing tweet...")</bpmn:script>
-    </bpmn:scriptTask>
     <bpmn:scriptTask id="NotifyEmployeeTask" name="Notify employee" scriptFormat="javascript">
       <bpmn:incoming>NoSequenceFlow</bpmn:incoming>
       <bpmn:outgoing>Flow_0esmy7n</bpmn:outgoing>
@@ -37,6 +32,10 @@
       <bpmn:incoming>Flow_1uuhc2l</bpmn:incoming>
       <bpmn:outgoing>Flow_0o2njqn</bpmn:outgoing>
     </bpmn:manualTask>
+    <bpmn:serviceTask id="PublishTweetTask" name="Publish tweet" camunda:class="com.github.gerdreiss.twitterqa.delegate.CreateTweetDelegate">
+      <bpmn:incoming>YesSequenceFlow</bpmn:incoming>
+      <bpmn:outgoing>Flow_1b6phy1</bpmn:outgoing>
+    </bpmn:serviceTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="TwitterQAProcess">
@@ -95,14 +94,14 @@
           <dc:Bounds x="670" y="152" width="80" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1pqgump_di" bpmnElement="PublishTweetTask">
-        <dc:Bounds x="530" y="87" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_12xdlz4_di" bpmnElement="NotifyEmployeeTask">
         <dc:Bounds x="530" y="200" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1d9u6s4_di" bpmnElement="ReviewTweetTask">
         <dc:Bounds x="270" y="87" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0owqn65_di" bpmnElement="PublishTweetTask">
+        <dc:Bounds x="530" y="87" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
