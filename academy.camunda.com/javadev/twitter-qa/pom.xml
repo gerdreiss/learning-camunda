@@ -103,6 +103,12 @@
       <version>4.0.7</version>
     </dependency>
 
+    <dependency>
+      <groupId>io.holunda.data</groupId>
+      <artifactId>camunda-bpm-data-kotlin</artifactId>
+      <version>0.0.6</version>
+    </dependency>
+
     <!-- Use GraalVM JavaScript for JDK > 14 -->
     <dependency>
       <groupId>org.graalvm.js</groupId>
@@ -125,10 +131,10 @@
       <artifactId>kotlin-stdlib-jdk8</artifactId>
     </dependency>
 
-    <!-- Test dependencies -->
+    <!-- Camunda test dependencies -->
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
+      <groupId>org.camunda.bpm.springboot</groupId>
+      <artifactId>camunda-bpm-spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -209,6 +215,13 @@
             <phase>compile</phase>
             <goals>
               <goal>compile</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>test-compile</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>test-compile</goal>
             </goals>
           </execution>
         </executions>

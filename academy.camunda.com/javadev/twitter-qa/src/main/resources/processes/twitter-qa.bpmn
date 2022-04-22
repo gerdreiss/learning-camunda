@@ -28,7 +28,7 @@
       <bpmn:outgoing>Flow_0esmy7n</bpmn:outgoing>
       <bpmn:script>print("notifying employee...")</bpmn:script>
     </bpmn:scriptTask>
-    <bpmn:serviceTask id="PublishTweetTask" name="Publish tweet" camunda:delegateExpression="${createTweetDelegate}">
+    <bpmn:serviceTask id="PublishTweetTask" name="Publish tweet" camunda:delegateExpression="${publishTweetDelegate}">
       <bpmn:incoming>YesSequenceFlow</bpmn:incoming>
       <bpmn:outgoing>Flow_1b6phy1</bpmn:outgoing>
     </bpmn:serviceTask>
