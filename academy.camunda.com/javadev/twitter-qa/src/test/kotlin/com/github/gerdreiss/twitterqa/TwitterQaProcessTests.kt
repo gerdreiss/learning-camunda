@@ -1,5 +1,6 @@
 package com.github.gerdreiss.twitterqa
 
+import com.github.gerdreiss.twitterqa.variables.APPROVED
 import com.github.gerdreiss.twitterqa.variables.TWEET_CONTENT
 import org.assertj.core.api.Assertions.*
 import org.camunda.bpm.engine.delegate.DelegateExecution
@@ -47,7 +48,7 @@ class TwitterQaProcessTests {
 
         assertThat(taskList).isNotNull.hasSize(1)
 
-        taskService().complete(taskList[0].id, mapOf("approved" to true))
+        taskService().complete(taskList[0].id, mapOf(APPROVED.name to true))
 
         assertThat(processInstance).hasPassed(findId("Tweet published"))
         assertThat(processInstance).isEnded
