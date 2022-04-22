@@ -11,9 +11,8 @@ import twitter4j.auth.AccessToken
 class CreateTweetDelegate : JavaDelegate {
 
     companion object {
-        @Suppress("JAVA_CLASS_ON_COMPANION")
         @JvmStatic
-        private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
+        private val logger = LoggerFactory.getLogger(CreateTweetDelegate::class.java)
     }
 
     override fun execute(execution: DelegateExecution) {
