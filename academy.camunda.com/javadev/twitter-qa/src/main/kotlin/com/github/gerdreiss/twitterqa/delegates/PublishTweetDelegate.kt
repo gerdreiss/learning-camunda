@@ -18,13 +18,20 @@ class PublishTweetDelegate : JavaDelegate {
 
     override fun execute(execution: DelegateExecution) {
         val tweetContent = TWEET_CONTENT.from(execution).get()
+        if ("Network error" == tweetContent) {
+            throw RuntimeException("Simulated network error")
+        }
+
         logger.info("Publishing tweet: '$tweetContent'")
         val accessToken = AccessToken(
             "220324559-CO8TfUmrcoCrvFHP4TacgToN5hLC8cMw4n2EwmHo",
             "WvVureFv5TBWTGhESgGe3fqZM7XbGMuyIhxB84zgcoUER"
         )
         val twitter = TwitterFactory().instance
-        twitter.setOAuthConsumer("lRhS80iIXXQtm6LM03awjvrvk", "gabtxwW8lnSL9yQUNdzAfgBOgIMSRqh7MegQs79GlKVWF36qLS")
+        twitter.setOAuthConsumer(
+            "lRhS80iIXXQtm6LM03awjvrvk",
+            "gabtxwW8lnSL9yQUNdzAfgBOgIMSRqh7MegQs79GlKVWF36qLS"
+        )
         twitter.oAuthAccessToken = accessToken
         twitter.updateStatus(tweetContent)
     }

@@ -50,6 +50,15 @@ class TwitterQaProcessTests {
 
         taskService().complete(taskList[0].id, mapOf(APPROVED.name to true))
 
+        // the long version
+        //val jobList = jobQuery()
+        //    .processInstanceId(processInstance.id)
+        //    .list()
+        //assertThat(jobList).isNotNull.hasSize(1)
+        //execute(jobList.first())
+        // the short version
+        execute(job())
+
         assertThat(processInstance).hasPassed(findId("Tweet published"))
         assertThat(processInstance).isEnded
     }
