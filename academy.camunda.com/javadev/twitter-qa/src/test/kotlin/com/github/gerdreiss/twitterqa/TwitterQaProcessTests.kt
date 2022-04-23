@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory
 import kotlin.random.Random
 
 @ExtendWith(ProcessEngineCoverageExtension::class)
+@Deployment(resources = ["processes/twitter-qa.bpmn"])
 class TwitterQaProcessTests {
 
     @BeforeEach
@@ -29,8 +30,7 @@ class TwitterQaProcessTests {
     }
 
     @Test
-    @Deployment(resources = ["processes/twitter-qa.bpmn"])
-    fun testHappyPath() {
+    fun `test approving a tweet`() {
 
         val processInstance = runtimeService()
             .startProcessInstanceByKey(
@@ -60,6 +60,31 @@ class TwitterQaProcessTests {
         execute(job())
 
         assertThat(processInstance).hasPassed(findId("Tweet published"))
+        assertThat(processInstance).isEnded
+    }
+
+    @Test
+    fun `test rejecting a tweet`() {
+
+        val processInstance = runtimeService()
+            .startProcessInstanceByKey(
+                "TwitterQAProcess",
+                mapOf(TWEET_CONTENT.name to tweetContent())
+            )
+
+        assertThat(processInstance).isWaitingAt(findId("Review tweet"))
+
+        val taskList = taskService()
+            .createTaskQuery()
+            .taskCandidateGroup("management")
+            .processInstanceId(processInstance.id)
+            .list()
+
+        assertThat(taskList).isNotNull.hasSize(1)
+
+        taskService().complete(taskList[0].id, mapOf(APPROVED.name to false))
+
+        assertThat(processInstance).hasPassed(findId("Tweet rejected"))
         assertThat(processInstance).isEnded
     }
 
