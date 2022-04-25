@@ -1,0 +1,170 @@
+{
+	"info": {
+		"_postman_id": "7cc86af6-344c-4e59-9fb6-1f1f4430969c",
+		"name": "Camunda",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Start Payment Retrieval Process",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"variables\": {\n\t\t\"amount\": {\n\t\t\t\"value\":555,\n\t\t\t\"type\":\"integer\"\n\t\t},\n\t\t\"item\": {\n\t\t\t\"value\": \"item-xyz\",\n            \"type\": \"string\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/process-definition/key/payment-retrieval/start",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engine-rest",
+						"process-definition",
+						"key",
+						"payment-retrieval",
+						"start"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Twitter QA Process Definitions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/process-definition",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engine-rest",
+						"process-definition"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start Twitter QA Process",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"variables\": {\n\t\t\"tweetcontent\": {\n\t\t\t\"value\":\"Postman sends his regards\",\n\t\t\t\"type\":\"string\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/process-definition/key/TwitterQAProcess/start",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engine-rest",
+						"process-definition",
+						"key",
+						"TwitterQAProcess",
+						"start"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Tasks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/task",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engine-rest",
+						"task"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Task",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/task?taskid=ReviewTweetTask",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engine-rest",
+						"task"
+					],
+					"query": [
+						{
+							"key": "taskid",
+							"value": "ReviewTweetTask"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Complete Task",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"variables\": {\n        \"approved\": {\n            \"value\": true,\n            \"type\": \"boolean\"\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/task/8c5a09c3-c488-11ec-85de-0e3028b0beb1/complete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engine-rest",
+						"task",
+						"8c5a09c3-c488-11ec-85de-0e3028b0beb1",
+						"complete"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
