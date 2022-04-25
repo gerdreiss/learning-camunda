@@ -12,7 +12,7 @@ fun main() {
         .build()
         .subscribe("notification")
         .handler { externalTask, externalTaskService ->
-            val content: String? = externalTask.getVariable("tweetcontent")
+            val content: String? = externalTask.getVariable("tweet_content")
             println("Tweet rejected: $content")
             externalTaskService.complete(externalTask, mapOf("notificationTimestamp" to Date()))
         }

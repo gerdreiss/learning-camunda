@@ -1,6 +1,6 @@
 package com.github.gerdreiss.twitterqa.variables
 
-import io.holunda.camunda.bpm.data.CamundaBpmDataKotlin
+import io.holunda.camunda.bpm.data.CamundaBpmDataKotlin.customVariable
 
-val TWEET_CONTENT  = CamundaBpmDataKotlin.customVariable<String>("tweetcontent")
-val APPROVED  = CamundaBpmDataKotlin.customVariable<Boolean>("approved")
+val TWEET_CONTENT = customVariable<String>("tweet_content")
+val APPROVED = customVariable<Boolean>("approved")

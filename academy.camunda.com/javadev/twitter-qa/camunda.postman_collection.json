@@ -64,7 +64,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"variables\": {\n\t\t\"tweetcontent\": {\n\t\t\t\"value\":\"Postman sends his regards\",\n\t\t\t\"type\":\"string\"\n\t\t}\n\t}\n}",
+					"raw": "{\n\t\"variables\": {\n\t\t\"tweet_content\": {\n\t\t\t\"value\":\"Postman sends his regards\",\n\t\t\t\"type\":\"string\"\n\t\t}\n\t}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
