@@ -84,6 +84,12 @@ class TwitterQaProcessTests {
             .startAfterActivity(findId("Review tweet"))
             .execute()
 
+        assertThat(processInstance)
+            .isWaitingAt(findId("Notify user of rejection"))
+            .externalTask()
+            .hasTopicName("notification")
+        complete(externalTask())
+
         //val taskList = taskService()
         //    .createTaskQuery()
         //    .taskCandidateGroup("management")

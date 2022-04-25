@@ -14,20 +14,15 @@
     <bpmn:sequenceFlow id="YesSequenceFlow" name="yes" sourceRef="TweetApprovedGateway" targetRef="PublishTweetTask">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${approved}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="NoSequenceFlow" name="no" sourceRef="TweetApprovedGateway" targetRef="NotifyEmployeeTask" />
+    <bpmn:sequenceFlow id="NoSequenceFlow" name="no" sourceRef="TweetApprovedGateway" targetRef="NotifyUserOfRejectionTask" />
     <bpmn:endEvent id="TweetRejectedEndEvent" name="Tweet rejected">
       <bpmn:incoming>Flow_0esmy7n</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_0esmy7n" sourceRef="NotifyEmployeeTask" targetRef="TweetRejectedEndEvent" />
+    <bpmn:sequenceFlow id="Flow_0esmy7n" sourceRef="NotifyUserOfRejectionTask" targetRef="TweetRejectedEndEvent" />
     <bpmn:endEvent id="TweetPublishedEndEvent" name="Tweet published">
       <bpmn:incoming>Flow_1b6phy1</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_1b6phy1" sourceRef="PublishTweetTask" targetRef="TweetPublishedEndEvent" />
-    <bpmn:scriptTask id="NotifyEmployeeTask" name="Notify employee" scriptFormat="javascript">
-      <bpmn:incoming>NoSequenceFlow</bpmn:incoming>
-      <bpmn:outgoing>Flow_0esmy7n</bpmn:outgoing>
-      <bpmn:script>print("notifying employee...")</bpmn:script>
-    </bpmn:scriptTask>
     <bpmn:serviceTask id="PublishTweetTask" name="Publish tweet" camunda:asyncBefore="true" camunda:delegateExpression="${publishTweetDelegate}">
       <bpmn:incoming>YesSequenceFlow</bpmn:incoming>
       <bpmn:outgoing>Flow_1b6phy1</bpmn:outgoing>
@@ -36,6 +31,10 @@
       <bpmn:incoming>Flow_1uuhc2l</bpmn:incoming>
       <bpmn:outgoing>Flow_0o2njqn</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:serviceTask id="NotifyUserOfRejectionTask" name="Notify user of rejection" camunda:type="external" camunda:topic="notification">
+      <bpmn:incoming>NoSequenceFlow</bpmn:incoming>
+      <bpmn:outgoing>Flow_0esmy7n</bpmn:outgoing>
+    </bpmn:serviceTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="TwitterQAProcess">
@@ -94,14 +93,15 @@
           <dc:Bounds x="670" y="152" width="80" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_12xdlz4_di" bpmnElement="NotifyEmployeeTask">
-        <dc:Bounds x="530" y="200" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0owqn65_di" bpmnElement="PublishTweetTask">
         <dc:Bounds x="530" y="87" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1mzyvri_di" bpmnElement="ReviewTweetTask">
         <dc:Bounds x="270" y="87" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ucldrx_di" bpmnElement="NotifyUserOfRejectionTask">
+        <dc:Bounds x="530" y="200" width="100" height="80" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
