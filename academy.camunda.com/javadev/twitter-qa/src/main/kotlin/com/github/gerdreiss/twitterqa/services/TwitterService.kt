@@ -20,10 +20,9 @@ class TwitterService {
 
     fun publishTweet(tweetContent: String): Long {
         logger.info("Publishing tweet: '$tweetContent'")
-        val accessToken = AccessToken(TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET)
         val twitter = TwitterFactory().instance
         twitter.setOAuthConsumer(TWITTER_ACCESS_OAUTH_KEY, TWITTER_ACCESS_OATH_SECRET)
-        twitter.oAuthAccessToken = accessToken
+        twitter.oAuthAccessToken = AccessToken(TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET)
         return twitter.updateStatus(tweetContent).id
     }
 }

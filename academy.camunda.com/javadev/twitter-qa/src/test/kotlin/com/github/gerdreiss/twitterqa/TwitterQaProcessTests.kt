@@ -33,7 +33,7 @@ class TwitterQaProcessTests {
         Mocks.register("publishTweetDelegate", PublishTweetDelegate(twitterService!!))
 
         Mockito
-            .`when`(twitterService!!.publishTweet(anyString()))
+            .`when`(twitterService?.publishTweet(anyString()))
             .thenReturn(Random.nextLong())
     }
 
