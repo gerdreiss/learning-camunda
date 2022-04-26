@@ -1,5 +1,6 @@
 package com.github.gerdreiss.twitterqa.services
 
+import arrow.core.Either
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import twitter4j.TwitterFactory
@@ -18,11 +19,11 @@ class TwitterService {
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
     }
 
-    fun publishTweet(tweetContent: String): Long {
+    fun publishTweet(tweetContent: String): Either<Throwable, Long> {
         logger.info("Publishing tweet: '$tweetContent'")
         val twitter = TwitterFactory().instance
         twitter.setOAuthConsumer(TWITTER_ACCESS_OAUTH_KEY, TWITTER_ACCESS_OATH_SECRET)
         twitter.oAuthAccessToken = AccessToken(TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET)
-        return twitter.updateStatus(tweetContent).id
+        return Either.catch { twitter.updateStatus(tweetContent).id }
     }
 }

@@ -1,5 +1,7 @@
 package com.github.gerdreiss.twitterqa
 
+import arrow.core.left
+import arrow.core.right
 import com.github.gerdreiss.twitterqa.delegates.PublishTweetDelegate
 import com.github.gerdreiss.twitterqa.services.TwitterService
 import com.github.gerdreiss.twitterqa.variables.APPROVED
@@ -16,6 +18,7 @@ import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
+import twitter4j.TwitterException
 import kotlin.random.Random
 
 private const val PROCESS_KEY = "TwitterQAProcess"
@@ -31,14 +34,14 @@ class TwitterQaProcessTests {
     fun init() {
         MockitoAnnotations.openMocks(this)
         Mocks.register("publishTweetDelegate", PublishTweetDelegate(twitterService!!))
-
-        Mockito
-            .`when`(twitterService?.publishTweet(anyString()))
-            .thenReturn(Random.nextLong())
     }
 
     @Test
     fun `test approving a tweet`() {
+
+        Mockito
+            .`when`(twitterService?.publishTweet(anyString()))
+            .thenReturn(Random.nextLong().right())
 
         val processInstance = runtimeService()
             .startProcessInstanceByKey(
@@ -107,6 +110,10 @@ class TwitterQaProcessTests {
     @Test
     fun `test superuser tweet`() {
 
+        Mockito
+            .`when`(twitterService?.publishTweet(anyString()))
+            .thenReturn(Random.nextLong().right())
+
         val processInstance = runtimeService()
             .createMessageCorrelation("superuserTweet")
             .setVariable(TWEET_CONTENT.name, tweetContent(11))
@@ -139,6 +146,26 @@ class TwitterQaProcessTests {
             .correlateWithResult()
 
         assertThat(processInstance).isEnded.hasPassed("TweetWithdrawnEndEvent")
+    }
+
+    @Test
+    fun `test duplicate tweet`() {
+
+        Mockito
+            .`when`(twitterService?.publishTweet(anyString()))
+            .thenReturn(TwitterException("Duplicate tweet").left())
+
+        val processInstance = runtimeService()
+            .createMessageCorrelation("superuserTweet")
+            .setVariable(TWEET_CONTENT.name, tweetContent(11))
+            .correlateWithResult()
+            .processInstance
+
+        assertThat(processInstance).isStarted
+
+        execute(job()) // Execute publish tweet job
+
+        assertThat(processInstance).isWaitingAt(findId("Amend Tweet"))
     }
 
     private fun tweetContent(exercise: Int): String =

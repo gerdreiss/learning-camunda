@@ -21,6 +21,7 @@
   <properties>
     <java.version>17</java.version>
     <kotlin.version>1.6.21</kotlin.version>
+    <arrow-stack.version>1.1.2</arrow-stack.version>
     <springBoot.version>2.6.7</springBoot.version>
     <camunda.version>7.17.0</camunda.version>
 
@@ -55,6 +56,13 @@
         <groupId>org.jetbrains.kotlin</groupId>
         <artifactId>kotlin-bom</artifactId>
         <version>${kotlin.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.arrow-kt</groupId>
+        <artifactId>arrow-stack</artifactId>
+        <version>${arrow-stack.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -129,6 +137,10 @@
     <dependency>
       <groupId>org.jetbrains.kotlin</groupId>
       <artifactId>kotlin-stdlib-jdk8</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.arrow-kt</groupId>
+      <artifactId>arrow-core</artifactId>
     </dependency>
 
     <!-- Camunda test dependencies -->
