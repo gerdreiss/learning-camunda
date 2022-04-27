@@ -7,3 +7,5 @@
 
 ### The Process:
 ![Twitter QA Process](doc/twitter-qa-process.png "Twitter QA Process")
+### The Process with business rule:
+![Twitter QA Process](doc/twitter-qa-process-with-business-rule.png "Twitter QA Process with Business Rule")
